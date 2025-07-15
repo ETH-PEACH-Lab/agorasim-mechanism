@@ -34,19 +34,19 @@ export default function SocialMediaSimulator() {
     const [reputation, setReputation] = useState(1.0);
     const [revenue, setRevenue] = useState(10000);
     const [day, setDay] = useState(1);
-    const [logs, setLogs] = useState([]);
+    const [logs, setLogs] = useState<string[]>([]);
     const [history, setHistory] = useState([
         { day: 0, users: 10, engagement: 1.0, reputation: 1.0, revenue: 10000 }
     ]);
 
     function simulateRound() {
-        let newEngagement = engagement + personalization * 0.05 - moderation * 0.03;
+        const newEngagement = engagement + personalization * 0.05 - moderation * 0.03;
         let newReputation = reputation + moderation * 0.04 - personalization * 0.02 - adTargeting * 0.01;
         if (moderation > 1.5) {
             newReputation += 0.05;
         }
         let newRevenue = revenue + newEngagement * adTargeting * Math.max(newReputation, 0.1) * 100;
-        let userChange = (newEngagement * 0.01 + newReputation * 0.05 - Math.random() * 0.02) * users;
+        const userChange = (newEngagement * 0.01 + newReputation * 0.05 - Math.random() * 0.02) * users;
         let newUsers = Math.max(5, Math.min(15, users + Math.floor(userChange)));
 
         if (newReputation < 0.5) {
@@ -157,24 +157,24 @@ export default function SocialMediaSimulator() {
     const chartOptions = {
         responsive: true,
         interaction: {
-            mode: "index",
+            mode: "index" as const,
             intersect: false
         },
         stacked: false,
         scales: {
             y1: {
-                type: "linear",
+                type: "linear" as const,
                 display: true,
-                position: "left",
+                position: "left" as const,
                 title: {
                     display: true,
                     text: "Users"
                 }
             },
             y2: {
-                type: "linear",
+                type: "linear" as const,
                 display: true,
-                position: "right",
+                position: "right" as const,
                 title: {
                     display: true,
                     text: "Engagement / Reputation"
@@ -184,9 +184,9 @@ export default function SocialMediaSimulator() {
                 }
             },
             y3: {
-                type: "linear",
+                type: "linear" as const,
                 display: true,
-                position: "right",
+                position: "right" as const,
                 title: {
                     display: true,
                     text: "Revenue"
