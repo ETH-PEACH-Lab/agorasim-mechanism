@@ -4,7 +4,8 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: '/agorasim-mechanism',  // Your repo name here
+  basePath: '/agorasim-mechanism',
+  assetPrefix: '/agorasim-mechanism/',   // 👈 This tells Next.js where to load JS/CSS from
 };
 
 module.exports = nextConfig;
